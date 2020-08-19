@@ -1,17 +1,17 @@
 <template>
   <div>
-    <card :rank="2" :suit="'H'" />
+    <hand :hand="G.deck" />
   </div>
 </template>
 
 <script>
-import Card from "./components/Card";
+import Hand from "./components/Hand";
 
 export default {
   name: "Board",
   props: ["G", "ctx", "moves", "events", "playerID"],
   components: {
-    card: Card,
+    hand: Hand,
   },
 };
 </script>
