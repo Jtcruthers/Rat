@@ -1,6 +1,6 @@
 <template>
   <span class="card">
-    <img :src="imageUrl" />
+    <img :src="imageUrl" width="200px" />
   </span>
 </template>
 
