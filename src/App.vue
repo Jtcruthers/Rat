@@ -1,44 +1,20 @@
 <template>
   <div id="app">
-    <board
-      :G="G"
-      :ctx="ctx"
-      :moves="client.moves"
-      :events="client.events"
-      :playerId="client.playerId"
-      @cell-clicked="cellClicked"
-    />
+    <client :playerID="'0'" />
+    <client :playerID="'1'" />
+    <client :playerID="'2'" />
   </div>
 </template>
 
 <script>
-import { Client } from 'boardgame.io/client';
-import { Rat } from './Rat'
-import Board from './Board';
+import Client from "./Client";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    'board': Board,
+    Client,
   },
-  data() {
-    return {
-      G: {},
-      ctx: {}
-    }
-  },
-  created() {
-    this.client = Client({ game: Rat });
-    this.client.start();
-    this.client.subscribe(state => {
-      this.G = {...state.G};
-      this.ctx = {...state.ctx};
-    });
-  },
-  methods: {
-
-  }
-}
+};
 </script>
 
 <style>
@@ -53,4 +29,3 @@ export default {
   min-height: 500px;
 }
 </style>
-
