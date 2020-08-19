@@ -1,17 +1,42 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <board
+      :G="G"
+      :ctx="ctx"
+      :moves="client.moves"
+      :events="client.events"
+      :playerId="client.playerId"
+      @cell-clicked="cellClicked"
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { Client } from 'boardgame.io/client';
+import { Rat } from './Rat'
+import Board from './Board';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    'board': Board,
+  },
+  data() {
+    return {
+      G: {},
+      ctx: {}
+    }
+  },
+  created() {
+    this.client = Client({ game: Rat });
+    this.client.start();
+    this.client.subscribe(state => {
+      this.G = {...state.G};
+      this.ctx = {...state.ctx};
+    });
+  },
+  methods: {
+
   }
 }
 </script>
@@ -24,5 +49,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  width: 100%;
+  min-height: 500px;
 }
 </style>
+
