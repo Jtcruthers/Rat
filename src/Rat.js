@@ -1,6 +1,7 @@
 const SUITS = ["H", "S", "D", "C"];
 const RANKS = [
   "2",
+  /*
   "3",
   "4",
   "5",
@@ -13,6 +14,7 @@ const RANKS = [
   "Q",
   "K",
   "A",
+  */
 ];
 
 const setup = (ctx) => {
@@ -25,15 +27,11 @@ const setup = (ctx) => {
   };
 
   const initPlayers = (ctx) => {
-    let players = [];
-    for (let i = 0; i < ctx.numPlayers; i++) {
-      players.push({
-        hand: [],
-        handsWon: 0,
-        isStillIn: true,
-      });
-    }
-    return players;
+    return Array(ctx.numPlayers).fill({
+      hand: [],
+      handsWon: 0,
+      isStillIn: true,
+    });
   };
 
   return {
