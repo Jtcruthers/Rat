@@ -19,7 +19,7 @@ export default {
   components: {
     board: Board,
   },
-  props: ["playerID"],
+  props: ["playerID", "numberOfPlayers"],
   data() {
     return {
       G: {},
@@ -31,6 +31,7 @@ export default {
       game: Rat,
       multiplayer: Local(),
       playerID: this.playerID,
+      numPlayers: this.numberOfPlayers,
     });
     this.client.start();
     this.unsub = this.client.subscribe((state) => {

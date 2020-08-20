@@ -1,6 +1,11 @@
 <template>
   <span class="card">
-    <img :src="imageUrl" width="200px" />
+    <img
+      :src="imageUrl"
+      :alt="cardID"
+      @click="$emit('card-clicked', cardID)"
+      width="200px"
+    />
   </span>
 </template>
 

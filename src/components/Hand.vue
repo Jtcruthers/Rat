@@ -6,6 +6,7 @@
       :key="card.rank + card.suit"
       :rank="card.rank"
       :suit="card.suit"
+      @card-clicked="$emit('played-card', card)"
     />
   </div>
 </template>

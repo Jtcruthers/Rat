@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <client :playerID="'0'" />
-    <client :playerID="'1'" />
-    <client :playerID="'2'" />
+    <client :playerID="'0'" :numberOfPlayers="this.numberOfPlayers" />
+    <client :playerID="'1'" :numberOfPlayers="this.numberOfPlayers" />
+    <client :playerID="'2'" :numberOfPlayers="this.numberOfPlayers" />
   </div>
 </template>
 
@@ -13,6 +13,9 @@ export default {
   name: "App",
   components: {
     Client,
+  },
+  created() {
+    this.numberOfPlayers = 3;
   },
 };
 </script>
