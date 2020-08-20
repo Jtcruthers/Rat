@@ -34,8 +34,8 @@ export default {
     });
     this.client.start();
     this.unsub = this.client.subscribe((state) => {
-      this.G = { ...state.G };
-      this.ctx = { ...state.ctx };
+      this.G = JSON.parse(JSON.stringify(state.G));
+      this.ctx = JSON.parse(JSON.stringify(state.ctx));
     });
   },
   destroyed() {
