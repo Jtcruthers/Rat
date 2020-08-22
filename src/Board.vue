@@ -1,5 +1,6 @@
 <template>
   <div>
+    <cards-played :cards="G.cardsPlayed" />
     <hand :hand="getHand" @played-card="onPlayCard" />
     <button class="deal" @click="onDeal">Deal</button>
     <trumps-picker @pick-trumps="onPickTrumps" />
@@ -7,6 +8,7 @@
 </template>
 
 <script>
+import CardsPlayed from "./components/CardsPlayed";
 import Hand from "./components/Hand";
 import TrumpsPicker from "./components/TrumpsPicker";
 
@@ -14,6 +16,7 @@ export default {
   name: "Board",
   props: ["G", "ctx", "moves", "events", "playerID"],
   components: {
+    CardsPlayed,
     Hand,
     TrumpsPicker,
   },
