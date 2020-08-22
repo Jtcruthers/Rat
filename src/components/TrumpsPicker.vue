@@ -33,7 +33,7 @@ button {
   width: 10%;
   margin: 20px 10px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 7px;
   border: none;
   font-size: 25px;
 }

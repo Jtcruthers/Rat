@@ -25,7 +25,7 @@ export default {
       this.moves.pickTrumps(trumps);
     },
     onPlayCard(card) {
-      this.moves.playCard(this.playerID, card);
+      this.moves.playCard(card);
     },
   },
   computed: {

@@ -52,8 +52,15 @@ const dealToPlayers = (G, ctx) => {
   G.hasDealtCards = true;
 };
 
-const playCard = (G, ctx, playerID, card) => {
-  console.log([card, playerID, G.players]);
+const playCard = (G, ctx, card) => {
+  const player = G.players[ctx.currentPlayer];
+
+  player.hand = player.hand.filter(
+    (playerCard) =>
+      playerCard.suit !== card.suit || playerCard.rank !== card.rank
+  );
+
+  G.cardsPlayed.push(card);
 };
 
 export const Rat = {
@@ -63,7 +70,7 @@ export const Rat = {
     cardsPlayed: [],
     trumps: "H",
     numberOfCards: 3,
-    hasPickedTrumps: false,
+    hasPickedTrumps: true,
     hasDealtCards: false,
     roundLeaderPos: 0,
   }),
@@ -85,6 +92,10 @@ export const Rat = {
     play: {
       moves: {
         playCard,
+      },
+
+      turn: {
+        moveLimit: 1,
       },
     },
   },
