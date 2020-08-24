@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import CardsPlayed from "./components/CardsPlayed";
-import Hand from "./components/Hand";
-import TrumpsPicker from "./components/TrumpsPicker";
+import CardsPlayed from "./CardsPlayed";
+import Hand from "./Hand";
+import TrumpsPicker from "./TrumpsPicker";
 
 export default {
   name: "Board",
@@ -18,7 +18,7 @@ export default {
   components: {
     CardsPlayed,
     Hand,
-    TrumpsPicker,
+    TrumpsPicker
   },
   methods: {
     onDeal() {
@@ -29,13 +29,13 @@ export default {
     },
     onPlayCard(card) {
       this.moves.playCard(card);
-    },
+    }
   },
   computed: {
     getHand() {
       return this.G.players[this.playerID].hand;
-    },
-  },
+    }
+  }
 };
 </script>
 

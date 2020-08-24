@@ -7,16 +7,16 @@
 </template>
 
 <script>
-import Client from "./Client";
+import Client from "./components/Client";
 
 export default {
   name: "App",
   components: {
-    Client,
+    Client
   },
   created() {
     this.numberOfPlayers = 3;
-  },
+  }
 };
 </script>
 

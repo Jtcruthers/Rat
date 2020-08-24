@@ -100,7 +100,10 @@ export const Rat = {
     },
   },
 
-  moves: {},
+  endIf: (G) => {
+    const playersStillIn = G.players.filter((player) => player.isStillIn);
+    if (playersStillIn.length > 1) return;
 
-  endIf: () => {},
+    // get playerStillIn id and return { winner: id }
+  },
 };
