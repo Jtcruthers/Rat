@@ -26,11 +26,14 @@ const initDeck = (ctx) => {
 };
 
 const initPlayers = (ctx) => {
-  return Array(ctx.numPlayers).fill({
-    hand: [],
-    handsWon: 0,
-    isStillIn: true,
-  });
+  return Array(ctx.numPlayers)
+    .fill(null)
+    .map((_, index) => ({
+      hand: [],
+      handsWon: 0,
+      isStillIn: true,
+      id: index.toString(),
+    }));
 };
 
 const pickTrumps = (G, _, newTrumps) => {
@@ -52,6 +55,30 @@ const dealToPlayers = (G, ctx) => {
   G.hasDealtCards = true;
 };
 
+const determineRoundWinner = ({ cardsPlayed, trumps }) => {
+  const trumpCards = cardsPlayed.filter((card) => card.suit == trumps);
+  if (trumpCards.length === 1) return trumpCards[0].playedBy;
+
+  let winningCardSet = trumpCards;
+  if (trumpCards.length === 0) {
+    // If no trump cards, then the starting suit is the only type of card that can win
+    const startingSuit = cardsPlayed[0].suit;
+    winningCardSet = cardsPlayed.filter((card) => card.suit === startingSuit);
+  }
+
+  const maxRankIndex = winningCardSet
+    .map((card) => card.rank)
+    .map((rank) => RANKS.indexOf(rank))
+    .reduce(
+      (maxIndex, rank, i, cardsPlayed) =>
+        rank > cardsPlayed[maxIndex] ? i : maxIndex,
+      0
+    );
+
+  const winningCard = winningCardSet[maxRankIndex];
+  return winningCard.playedBy;
+};
+
 const playCard = (G, ctx, card) => {
   const player = G.players[ctx.currentPlayer];
 
@@ -60,7 +87,13 @@ const playCard = (G, ctx, card) => {
       playerCard.suit !== card.suit || playerCard.rank !== card.rank
   );
 
-  G.cardsPlayed.push(card);
+  G.cardsPlayed.push({ ...card, playedBy: ctx.currentPlayer });
+
+  if (G.cardsPlayed.length === ctx.numPlayers) {
+    const roundWinner = determineRoundWinner(G);
+    G.players[roundWinner].handsWon++;
+    G.cardsPlayed = [];
+  }
 };
 
 export const Rat = {
